@@ -148,21 +148,7 @@ footer{text-align:center;color:var(--soft);font-size:13px;padding:30px 0 40px}
       </div>
     </aside>
     <div class="card chat">
-      <div class="chead">
-        <div class="avatar">🌱</div>
-        <div><b>그린펫 에이전트</b><small>● 온라인</small></div>
-      </div>
-      <div class="msgs" id="msgs"></div>
-      <div class="chips" id="chips">
-        <button>고슴도치와 몬스테라 같이 키워도 돼요?</button>
-        <button>햄스터 적정 온도·습도 알려줘</button>
-        <button>원룸에서 키우기 좋은 조합은?</button>
-        <button>베란다 식물 관리법</button>
-      </div>
-      <form id="form">
-        <input id="input" placeholder="궁금한 점을 입력하세요…" autocomplete="off">
-        <button class="btn" type="submit">보내기</button>
-      </form>
+      <iframe src="https://copilotstudio.microsoft.com/environments/cfe472a7-8d6b-e57d-9381-81572ac35b9d/bots/cr72a_aicreativeagentteam_4qzqPa/webchat?__version__=2&enableFileAttachment=false&cliAgent=true" title="그린펫 에이전트" style="width:100%;height:100%;border:0"></iframe>
     </div>
   </section>
   <section class="sec" id="features">
@@ -179,53 +165,16 @@ footer{text-align:center;color:var(--soft);font-size:13px;padding:30px 0 40px}
 </div>
 <script>
 const $ = id => document.getElementById(id);
-const msgs = $('msgs');
 let mode = '함께';
-function add(text, who){
-  const d = document.createElement('div');
-  d.className = 'm ' + who; d.textContent = text;
-  msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight; return d;
-}
-add('안녕하세요! 🌿 식물과 동물 케어 도우미예요.\n온도·습도, 키우는 방법, 방 크기, 활동 공간까지 물어보세요.\n왼쪽에 환경을 입력하면 더 정확해져요.', 'bot');
 document.querySelectorAll('#mode button').forEach(b => b.onclick = () => {
   document.querySelectorAll('#mode button').forEach(x => x.classList.remove('on'));
   b.classList.add('on'); mode = b.dataset.v; applyMode();
 });
-const P=['name','env','temp','hum','space','light','water'], A=['name','env','temp','hum','space','active','food','info','note'];
 function applyMode(){
   $('plantBox').classList.toggle('hide', mode==='동물만');
   $('animalBox').classList.toggle('hide', mode==='식물만');
 }
-function collect(){
-  const o={};
-  if(mode!=='동물만') o.plant=Object.fromEntries(P.map(k=>[k,$('p_'+k).value]));
-  if(mode!=='식물만') o.animal=Object.fromEntries(A.map(k=>[k,$('a_'+k).value]));
-  return o;
-}
 applyMode();
-// 실제 에이전트 API 연결 위치: 아래 fetch 주석을 풀고 엔드포인트로 교체하세요.
-async function askAgent(question, context){
-  /*
-  const res = await fetch('/api/agent', {
-    method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ question, context })
-  });
-  return (await res.json()).answer;
-  */
-  await new Promise(r => setTimeout(r, 900));
-  return `[데모 응답]\n질문: ${question}\n\n사육 방식: ${context.mode}\n${JSON.stringify({plant:context.plant,animal:context.animal},null,1)}\n\n에이전트 API를 연결하면 온도·습도·사육법·공간 정보가 여기에 표시됩니다.`;
-}
-async function send(q){
-  q = q.trim(); if(!q) return;
-  add(q, 'me'); $('chips').style.display = 'none';
-  const t = add('', 'bot'); t.innerHTML = '<span class="dots"><span></span><span></span><span></span></span>';
-  try{
-    t.textContent = await askAgent(q, {mode, ...collect()});
-  }catch(e){ t.textContent = '오류가 발생했어요. 잠시 후 다시 시도해주세요.'; }
-  msgs.scrollTop = msgs.scrollHeight;
-}
-$('form').onsubmit = e => { e.preventDefault(); const v = $('input').value; $('input').value=''; send(v); };
-document.querySelectorAll('#chips button').forEach(b => b.onclick = () => send(b.textContent));
 </script>
 </body>
 </html>
