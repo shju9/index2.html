@@ -1,156 +1,192 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>바른말 탐험대 · 초등 맞춤법 학습</title></head>
-<body>
-  
-<script type="text/plain" id="chat-embed-source">
-<!-- ▼▼▼ 채팅 코드 삽입 위치 ▼▼▼ -->
-<!-- ▲▲▲ 채팅 코드 삽입 위치 ▲▲▲ -->
-</script>
-
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>그린펫 · 식물 & 동물 케어 에이전트</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
 <style>
-  :root{
-    --ink:#1d2233; --ink-soft:#5a6280; --line:#e8eaf3;
-    --brand:#5b5bf6; --brand-soft:#eeeeff;
-    --mint:#12b8a0; --mint-soft:#e2f8f4;
-    --sun:#ff9550; --sun-soft:#fff0e6;
-    --card:#ffffff; --bg:#f6f7fc;
-    --shadow:0 1px 2px rgba(29,34,51,.04), 0 12px 32px -12px rgba(29,34,51,.18);
-    --radius:20px;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; background:var(--bg); color:var(--ink);
-    font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-    -webkit-font-smoothing:antialiased; line-height:1.6;
-  }
-  body::before{
-    content:""; position:fixed; inset:0 0 auto 0; height:560px; z-index:-1;
-    background:
-      radial-gradient(900px 440px at 12% -10%, #dcdcff 0%, transparent 60%),
-      radial-gradient(760px 400px at 88% -20%, #d6f5ee 0%, transparent 60%);
-  }
-  a{color:inherit}
-  .wrap{max-width:1000px; margin:0 auto; padding:0 24px}
-
-  /* ── 헤더 ── */
-  header{position:sticky; top:0; z-index:50; backdrop-filter:blur(14px);
-    background:rgba(255,255,255,.72); border-bottom:1px solid rgba(232,234,243,.9)}
-  .nav{display:flex; align-items:center; gap:14px; height:68px}
-  .logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:18px; letter-spacing:-.02em}
-  .logo .mark{width:34px; height:34px; border-radius:11px; display:grid; place-items:center; font-size:18px;
-    background:linear-gradient(140deg,var(--brand),#8b7bff); box-shadow:0 6px 14px -6px var(--brand)}
-  .nav-links{display:flex; gap:6px; margin-left:18px}
-  .nav-links a{padding:8px 12px; border-radius:10px; font-size:14.5px; font-weight:600;
-    color:var(--ink-soft); text-decoration:none}
-  .nav-links a:hover{background:var(--brand-soft); color:var(--brand)}
-  .nav-right{margin-left:auto; display:flex; align-items:center; gap:10px}
-  .btn{border:0; cursor:pointer; font-family:inherit; font-weight:700; border-radius:12px;
-    padding:10px 16px; font-size:14.5px; background:var(--brand); color:#fff;
-    box-shadow:0 8px 18px -10px var(--brand); transition:transform .12s, box-shadow .12s}
-  .btn:hover{transform:translateY(-1px); box-shadow:0 12px 22px -10px var(--brand)}
-
-  /* ── 히어로 ── */
-  .hero{padding:56px 0 30px; text-align:center}
-  .badge{display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:700;
-    background:#fff; border:1px solid var(--line); color:var(--brand);
-    padding:7px 13px; border-radius:999px; box-shadow:var(--shadow)}
-  h1{font-size:clamp(30px,4.6vw,50px); line-height:1.22; letter-spacing:-.035em; margin:18px 0 12px; font-weight:800}
-  h1 em{font-style:normal; background:linear-gradient(180deg,transparent 62%,#ffe08a 62%)}
-  .lede{color:var(--ink-soft); font-size:17px; max-width:600px; margin:0 auto}
-
-  /* ── 채팅 패널 ── */
-  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow)}
-  .chat{display:flex; flex-direction:column; overflow:hidden;
-    height:calc(100vh - 190px); min-height:600px; margin-bottom:56px}
-  .chat-top{display:flex; align-items:center; gap:11px; padding:15px 18px; border-bottom:1px solid var(--line)}
-  .avatar{width:38px; height:38px; border-radius:12px; display:grid; place-items:center; font-size:19px;
-    background:linear-gradient(140deg,var(--mint),#5ad9c4)}
-  .chat-top b{display:block; font-size:15px; letter-spacing:-.02em}
-  .chat-top small{color:var(--mint); font-size:12.5px; font-weight:700}
-  .chat-top .dot{width:7px; height:7px; border-radius:50%; background:var(--mint); display:inline-block; margin-right:5px}
-  #chat-frame{flex:1; width:100%; border:0; background:#fff}
-
-  /* ── 학부모 안내 ── */
-  .info{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; padding:0 0 56px}
-  .info .card{padding:20px}
-  .info h3{margin:12px 0 6px; font-size:15.5px; letter-spacing:-.02em}
-  .info p{margin:0; font-size:13.5px; color:var(--ink-soft)}
-  .ico{width:30px; height:30px; border-radius:9px; display:grid; place-items:center; font-size:16px}
-  .ico.b{background:var(--brand-soft)} .ico.m{background:var(--mint-soft)} .ico.s{background:var(--sun-soft)}
-
-  footer{border-top:1px solid var(--line); background:#fff; padding:28px 0; font-size:13px; color:var(--ink-soft)}
-  .foot{display:flex; gap:14px; flex-wrap:wrap; align-items:center}
-  .foot .logo{font-size:15px}
-
-  @media (max-width:900px){
-    .info{grid-template-columns:1fr}
-    .nav-links{display:none}
-    .chat{height:620px}
-  }
-  @media (max-width:560px){ .wrap{padding:0 16px} }
+:root{--ink:#1c2b22;--soft:#5d7064;--line:#e3ece5;--green:#2f9e5f;--green-d:#1f7a47;--green-s:#e6f6ec;
+--amber-s:#fff3e0;--sky-s:#e4f2fb;--bg:#f5faf6;--card:#fff;
+--shadow:0 1px 2px rgba(28,43,34,.05),0 14px 34px -14px rgba(28,43,34,.22)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,"Malgun Gothic",sans-serif;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:520px;z-index:-1;
+background:radial-gradient(800px 400px at 10% -10%,#d3f0de,transparent 60%),radial-gradient(700px 380px at 92% -20%,#fde9c9,transparent 60%)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.75);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;height:64px;gap:12px}
+.logo{font-weight:800;font-size:19px;display:flex;gap:9px;align-items:center}
+.logo i{font-style:normal;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(140deg,var(--green),#6fd09a)}
+nav a{margin-left:6px;padding:8px 12px;border-radius:10px;font-weight:600;font-size:14.5px;color:var(--soft);text-decoration:none}
+nav a:hover{background:var(--green-s);color:var(--green-d)}
+.nav .sp{flex:1}
+.btn{border:0;cursor:pointer;font:inherit;font-weight:700;background:var(--green);color:#fff;padding:10px 16px;border-radius:12px;text-decoration:none;font-size:14.5px}
+.btn:hover{background:var(--green-d)}
+.hero{text-align:center;padding:48px 0 24px}
+.badge{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--green-d);font-weight:700;font-size:13px;padding:6px 14px;border-radius:99px}
+h1{font-size:clamp(28px,5vw,46px);letter-spacing:-.03em;line-height:1.25;margin:16px 0 10px}
+h1 em{font-style:normal;color:var(--green)}
+.hero p{color:var(--soft);max-width:560px;margin:0 auto;font-size:16.5px}
+.main{display:grid;grid-template-columns:320px 1fr;gap:22px;padding:18px 0 40px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
+aside{display:flex;flex-direction:column;gap:16px}
+.panel{padding:20px}
+.panel h3{margin:0 0 12px;font-size:15px}
+.seg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:var(--bg);padding:5px;border-radius:12px}
+.seg button{border:0;background:none;font:inherit;font-weight:700;font-size:13.5px;padding:9px 4px;border-radius:9px;cursor:pointer;color:var(--soft)}
+.seg button.on{background:#fff;color:var(--green-d);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.field{display:block;margin-top:14px;font-size:13.5px;font-weight:600;color:var(--soft)}
+.field select,.field input{width:100%;margin-top:5px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;font:inherit;color:var(--ink);background:#fff}
+.field select:focus,.field input:focus{outline:2px solid var(--green-s);border-color:var(--green)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{border-radius:14px;padding:12px;font-size:12.5px;font-weight:600;color:var(--soft)}
+.stat b{display:block;font-size:19px;color:var(--ink)}
+.s1{background:var(--amber-s)}.s2{background:var(--sky-s)}.s3{background:var(--green-s)}.s4{background:#f3eefc}
+.chat{display:flex;flex-direction:column;height:680px;overflow:hidden}
+.chead{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.avatar{width:42px;height:42px;border-radius:14px;background:var(--green-s);display:grid;place-items:center;font-size:22px}
+.chead b{display:block}.chead small{color:var(--green);font-weight:700}
+.msgs{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;background:linear-gradient(#fbfefc,#f5faf6)}
+.m{max-width:80%;padding:12px 16px;border-radius:18px;white-space:pre-wrap;word-break:break-word;font-size:15px;animation:in .25s ease}
+.m.bot{background:#fff;border:1px solid var(--line);border-top-left-radius:6px;align-self:flex-start}
+.m.me{background:var(--green);color:#fff;border-top-right-radius:6px;align-self:flex-end}
+@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.dots span{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:var(--green);animation:b 1s infinite}
+.dots span:nth-child(2){animation-delay:.15s}.dots span:nth-child(3){animation-delay:.3s}
+@keyframes b{50%{transform:translateY(-5px);opacity:.4}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:12px 20px 0}
+.chips button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:7px 13px;font:inherit;font-size:13px;font-weight:600;color:var(--green-d);cursor:pointer}
+.chips button:hover{background:var(--green-s)}
+form{display:flex;gap:10px;padding:14px 20px 18px}
+form input{flex:1;padding:13px 16px;border:1px solid var(--line);border-radius:14px;font:inherit}
+form input:focus{outline:2px solid var(--green-s);border-color:var(--green)}
+.sec{padding:30px 0}
+.sec h2{font-size:26px;letter-spacing:-.02em;margin:0 0 6px}
+.sec>p{color:var(--soft);margin:0 0 20px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.f{padding:20px}.f .ic{font-size:30px}.f h4{margin:8px 0 4px}.f p{margin:0;color:var(--soft);font-size:14px}
+footer{text-align:center;color:var(--soft);font-size:13px;padding:30px 0 40px}
+@media(max-width:860px){.main{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}nav{display:none}.chat{height:600px}}
 </style>
-
-<header>
-  <div class="wrap nav">
-    <div class="logo"><span class="mark">🧭</span> 바른말 탐험대</div>
-    <nav class="nav-links">
-      <a href="#chat">AI 선생님</a>
-      <a href="#info">학부모·선생님</a>
-    </nav>
-    <div class="nav-right">
-      <button class="btn" onclick="document.getElementById('chat').scrollIntoView({behavior:'smooth'})">학습 시작</button>
-    </div>
-  </div>
-</header>
-
-<section class="wrap hero">
-  <span class="badge">✨ 초등 2~5학년 · AI 선생님과 1:1 맞춤법 공부</span>
-  <h1>헷갈리는 맞춤법,<br><em>물어보면서</em> 배워요</h1>
-  <p class="lede">되와 돼, 안과 않… 외우지 않아도 괜찮아요. AI 선생님이 문제를 내주고, 왜 틀렸는지 하나씩 알려줘요.</p>
-</section>
-
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="logo"><i>🌿</i>그린펫</div>
+  <nav><a href="#chat">상담하기</a><a href="#features">기능</a></nav>
+  <div class="sp"></div>
+  <a class="btn" href="#chat">무료로 물어보기</a>
+</div></header>
 <div class="wrap">
-  <section class="card chat" id="chat">
-    <div class="chat-top">
-      <span class="avatar">🦉</span>
-      <div><b>맞춤법 선생님</b><small><span class="dot"></span>지금 대답할 수 있어요</small></div>
-    </div>
-    <iframe id="chat-frame" title="맞춤법 학습 채팅"></iframe>
+  <section class="hero">
+    <span class="badge">🪴 식물 · 🐹 동물 · 🏠 공간 맞춤 케어</span>
+    <h1>식물과 동물,<br><em>함께든 따로든</em> 잘 키우는 법</h1>
+    <p>적정 온도·습도, 사육 방법, 필요한 방 크기, 활동 공간까지 한 번에 알려드려요.</p>
   </section>
+  <section class="main" id="chat">
+    <aside>
+      <div class="card panel">
+        <h3>🏡 어떻게 키우시나요?</h3>
+        <div class="seg" id="mode">
+          <button class="on" data-v="함께">함께</button>
+          <button data-v="식물만">식물만</button>
+          <button data-v="동물만">동물만</button>
+        </div>
+        <label class="field">키우는 식물/동물
+          <input id="subject" placeholder="예: 몬스테라, 햄스터, 고슴도치">
+        </label>
+        <label class="field">방 크기
+          <select id="room">
+            <option value="">선택 안 함</option>
+            <option>3평 이하 (원룸)</option><option>4~6평</option><option>7~10평</option><option>11평 이상</option>
+          </select>
+        </label>
+        <label class="field">주로 지낼 방
+          <select id="where">
+            <option value="">선택 안 함</option>
+            <option>거실</option><option>침실</option><option>베란다</option><option>주방</option><option>욕실</option>
+          </select>
+        </label>
+      </div>
+      <div class="card panel">
+        <h3>📊 추천 환경 (예시)</h3>
+        <div class="stats">
+          <div class="stat s1">🌡️ 온도<b id="t">20~26℃</b></div>
+          <div class="stat s2">💧 습도<b id="h">40~60%</b></div>
+          <div class="stat s3">📐 공간<b id="r">3평~</b></div>
+          <div class="stat s4">📍 위치<b id="w">거실</b></div>
+        </div>
+      </div>
+    </aside>
+    <div class="card chat">
+      <div class="chead">
+        <div class="avatar">🌱</div>
+        <div><b>그린펫 에이전트</b><small>● 온라인</small></div>
+      </div>
+      <div class="msgs" id="msgs"></div>
+      <div class="chips" id="chips">
+        <button>고슴도치와 몬스테라 같이 키워도 돼요?</button>
+        <button>햄스터 적정 온도·습도 알려줘</button>
+        <button>원룸에서 키우기 좋은 조합은?</button>
+        <button>베란다 식물 관리법</button>
+      </div>
+      <form id="form">
+        <input id="input" placeholder="궁금한 점을 입력하세요…" autocomplete="off">
+        <button class="btn" type="submit">보내기</button>
+      </form>
+    </div>
+  </section>
+  <section class="sec" id="features">
+    <h2>무엇을 알려드리나요?</h2>
+    <p>키우는 환경에 맞춘 종합 가이드를 제공합니다.</p>
+    <div class="grid">
+      <div class="card f"><div class="ic">🌡️</div><h4>온도·습도</h4><p>종별 적정 범위와 계절별 관리 팁</p></div>
+      <div class="card f"><div class="ic">📖</div><h4>키우는 방법</h4><p>급여, 물주기, 빛, 청소 주기</p></div>
+      <div class="card f"><div class="ic">📐</div><h4>방 크기</h4><p>필요한 최소 공간과 배치 추천</p></div>
+      <div class="card f"><div class="ic">🚪</div><h4>활동 공간</h4><p>어느 방에서 지내면 좋은지 안내</p></div>
+    </div>
+  </section>
+  <footer>© 그린펫 · 실제 반려동물 건강 문제는 수의사와 상담하세요.</footer>
 </div>
-
-<section class="wrap info" id="info">
-  <div class="card">
-    <span class="ico b">👀</span>
-    <h3>혼자서도 할 수 있어요</h3>
-    <p>정답만 알려주지 않고, 왜 그런지 규칙을 아이 눈높이로 다시 설명해 줘요.</p>
-  </div>
-  <div class="card">
-    <span class="ico m">🧩</span>
-    <h3>학년에 맞는 문제</h3>
-    <p>2~5학년 교과 어휘와 받아쓰기 급수에 맞춰 난이도를 조절해요.</p>
-  </div>
-  <div class="card">
-    <span class="ico s">🏅</span>
-    <h3>하루 10분이면 충분</h3>
-    <p>궁금한 문장 하나만 물어봐도 그날 공부가 돼요.</p>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap foot">
-    <div class="logo"><span class="mark">🧭</span> 바른말 탐험대</div>
-    <span>초등 2~5학년 맞춤법 자기주도 학습</span>
-    <span style="margin-left:auto">© 2026 바른말 탐험대</span>
-  </div>
-</footer>
-
 <script>
-// ── 채팅 코드 주입: 최상단 script 블록 내용을 그대로 iframe 문서로 사용
-document.getElementById('chat-frame').srcdoc =
-  document.getElementById('chat-embed-source').textContent;
+const $ = id => document.getElementById(id);
+const msgs = $('msgs');
+let mode = '함께';
+function add(text, who){
+  const d = document.createElement('div');
+  d.className = 'm ' + who; d.textContent = text;
+  msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight; return d;
+}
+add('안녕하세요! 🌿 식물과 동물 케어 도우미예요.\n온도·습도, 키우는 방법, 방 크기, 활동 공간까지 물어보세요.\n왼쪽에서 환경을 선택하면 더 정확해져요.', 'bot');
+document.querySelectorAll('#mode button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#mode button').forEach(x => x.classList.remove('on'));
+  b.classList.add('on'); mode = b.dataset.v;
+});
+$('room').onchange = () => $('r').textContent = $('room').value.split(' ')[0] || '3평~';
+$('where').onchange = () => $('w').textContent = $('where').value || '거실';
+// 실제 에이전트 API 연결 위치: 아래 fetch 주석을 풀고 엔드포인트로 교체하세요.
+async function askAgent(question, context){
+  /*
+  const res = await fetch('/api/agent', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ question, context })
+  });
+  return (await res.json()).answer;
+  */
+  await new Promise(r => setTimeout(r, 900));
+  return `[데모 응답]\n질문: ${question}\n\n사육 방식: ${context.mode}\n대상: ${context.subject || '미입력'}\n방 크기: ${context.room || '미선택'} / 위치: ${context.where || '미선택'}\n\n에이전트 API를 연결하면 온도·습도·사육법·공간 정보가 여기에 표시됩니다.`;
+}
+async function send(q){
+  q = q.trim(); if(!q) return;
+  add(q, 'me'); $('chips').style.display = 'none';
+  const t = add('', 'bot'); t.innerHTML = '<span class="dots"><span></span><span></span><span></span></span>';
+  try{
+    t.textContent = await askAgent(q, {mode, subject:$('subject').value, room:$('room').value, where:$('where').value});
+  }catch(e){ t.textContent = '오류가 발생했어요. 잠시 후 다시 시도해주세요.'; }
+  msgs.scrollTop = msgs.scrollHeight;
+}
+$('form').onsubmit = e => { e.preventDefault(); const v = $('input').value; $('input').value=''; send(v); };
+document.querySelectorAll('#chips button').forEach(b => b.onclick = () => send(b.textContent));
 </script>
 </body>
 </html>
