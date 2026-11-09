@@ -39,6 +39,7 @@ aside{display:flex;flex-direction:column;gap:16px}
 .field{display:block;margin-top:14px;font-size:13.5px;font-weight:600;color:var(--soft)}
 .field select,.field input{width:100%;margin-top:5px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;font:inherit;color:var(--ink);background:#fff}
 .field select:focus,.field input:focus{outline:2px solid var(--green-s);border-color:var(--green)}
+.group{margin-top:6px;padding-top:6px;border-top:1px dashed var(--line)}.gt{margin:12px 0 0;font-size:14px;color:var(--green-d)}.hide{display:none}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .stat{border-radius:14px;padding:12px;font-size:12.5px;font-weight:600;color:var(--soft)}
 .stat b{display:block;font-size:19px;color:var(--ink)}
@@ -92,29 +93,57 @@ footer{text-align:center;color:var(--soft);font-size:13px;padding:30px 0 40px}
           <button data-v="식물만">식물만</button>
           <button data-v="동물만">동물만</button>
         </div>
-        <label class="field">키우는 식물/동물
-          <input id="subject" placeholder="예: 몬스테라, 햄스터, 고슴도치">
+        <div id="plantBox" class="group"><h4 class="gt">🪴 식물</h4>
+        <label class="field">🪴 키우는 식물
+          <input id="p_name" placeholder="예: 몬스테라, 선인장, 허브">
         </label>
-        <label class="field">방 크기
-          <select id="room">
-            <option value="">선택 안 함</option>
-            <option>3평 이하 (원룸)</option><option>4~6평</option><option>7~10평</option><option>11평 이상</option>
-          </select>
+        <label class="field">환경조건
+          <input id="p_env" placeholder="예: 남향 거실, 햇빛 잘 드는 원룸, 통풍 좋음">
         </label>
-        <label class="field">주로 지낼 방
-          <select id="where">
-            <option value="">선택 안 함</option>
-            <option>거실</option><option>침실</option><option>베란다</option><option>주방</option><option>욕실</option>
-          </select>
+        <label class="field">온도
+          <input id="p_temp" placeholder="예: 20 ~ 26℃">
         </label>
-      </div>
-      <div class="card panel">
-        <h3>📊 추천 환경 (예시)</h3>
-        <div class="stats">
-          <div class="stat s1">🌡️ 온도<b id="t">20~26℃</b></div>
-          <div class="stat s2">💧 습도<b id="h">40~60%</b></div>
-          <div class="stat s3">📐 공간<b id="r">3평~</b></div>
-          <div class="stat s4">📍 위치<b id="w">거실</b></div>
+        <label class="field">습도
+          <input id="p_hum" placeholder="예: 40 ~ 60%">
+        </label>
+        <label class="field">공간
+          <input id="p_space" placeholder="예: 거실 창가 / 3평 / 화분 30cm">
+        </label>
+        <label class="field">빛
+          <input id="p_light" placeholder="예: 밝은 간접광, 하루 6시간">
+        </label>
+        <label class="field">물주기
+          <input id="p_water" placeholder="예: 흙 마르면 주 1회">
+        </label>
+        </div>
+        <div id="animalBox" class="group"><h4 class="gt">🐹 동물</h4>
+        <label class="field">🐹 키우는 동물
+          <input id="a_name" placeholder="예: 햄스터, 고슴도치, 고양이">
+        </label>
+        <label class="field">환경조건
+          <input id="a_env" placeholder="예: 조용한 침실, 직사광선 없음, 방음">
+        </label>
+        <label class="field">온도
+          <input id="a_temp" placeholder="예: 22 ~ 26℃">
+        </label>
+        <label class="field">습도
+          <input id="a_hum" placeholder="예: 40 ~ 60%">
+        </label>
+        <label class="field">공간
+          <input id="a_space" placeholder="예: 침실 / 4평 / 케이지 60×40cm">
+        </label>
+        <label class="field">활동 시간대
+          <input id="a_active" placeholder="예: 야행성, 주행성, 새벽·저녁 활동">
+        </label>
+        <label class="field">먹이
+          <input id="a_food" placeholder="예: 햄스터 사료, 곤충, 채소">
+        </label>
+        <label class="field">나이·성별·마릿수
+          <input id="a_info" placeholder="예: 생후 3개월, 수컷, 1마리">
+        </label>
+        <label class="field">특이사항
+          <input id="a_note" placeholder="예: 소음에 예민, 탈출 잘함, 겨울잠">
+        </label>
         </div>
       </div>
     </aside>
@@ -157,13 +186,23 @@ function add(text, who){
   d.className = 'm ' + who; d.textContent = text;
   msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight; return d;
 }
-add('안녕하세요! 🌿 식물과 동물 케어 도우미예요.\n온도·습도, 키우는 방법, 방 크기, 활동 공간까지 물어보세요.\n왼쪽에서 환경을 선택하면 더 정확해져요.', 'bot');
+add('안녕하세요! 🌿 식물과 동물 케어 도우미예요.\n온도·습도, 키우는 방법, 방 크기, 활동 공간까지 물어보세요.\n왼쪽에 환경을 입력하면 더 정확해져요.', 'bot');
 document.querySelectorAll('#mode button').forEach(b => b.onclick = () => {
   document.querySelectorAll('#mode button').forEach(x => x.classList.remove('on'));
-  b.classList.add('on'); mode = b.dataset.v;
+  b.classList.add('on'); mode = b.dataset.v; applyMode();
 });
-$('room').onchange = () => $('r').textContent = $('room').value.split(' ')[0] || '3평~';
-$('where').onchange = () => $('w').textContent = $('where').value || '거실';
+const P=['name','env','temp','hum','space','light','water'], A=['name','env','temp','hum','space','active','food','info','note'];
+function applyMode(){
+  $('plantBox').classList.toggle('hide', mode==='동물만');
+  $('animalBox').classList.toggle('hide', mode==='식물만');
+}
+function collect(){
+  const o={};
+  if(mode!=='동물만') o.plant=Object.fromEntries(P.map(k=>[k,$('p_'+k).value]));
+  if(mode!=='식물만') o.animal=Object.fromEntries(A.map(k=>[k,$('a_'+k).value]));
+  return o;
+}
+applyMode();
 // 실제 에이전트 API 연결 위치: 아래 fetch 주석을 풀고 엔드포인트로 교체하세요.
 async function askAgent(question, context){
   /*
@@ -174,14 +213,14 @@ async function askAgent(question, context){
   return (await res.json()).answer;
   */
   await new Promise(r => setTimeout(r, 900));
-  return `[데모 응답]\n질문: ${question}\n\n사육 방식: ${context.mode}\n대상: ${context.subject || '미입력'}\n방 크기: ${context.room || '미선택'} / 위치: ${context.where || '미선택'}\n\n에이전트 API를 연결하면 온도·습도·사육법·공간 정보가 여기에 표시됩니다.`;
+  return `[데모 응답]\n질문: ${question}\n\n사육 방식: ${context.mode}\n${JSON.stringify({plant:context.plant,animal:context.animal},null,1)}\n\n에이전트 API를 연결하면 온도·습도·사육법·공간 정보가 여기에 표시됩니다.`;
 }
 async function send(q){
   q = q.trim(); if(!q) return;
   add(q, 'me'); $('chips').style.display = 'none';
   const t = add('', 'bot'); t.innerHTML = '<span class="dots"><span></span><span></span><span></span></span>';
   try{
-    t.textContent = await askAgent(q, {mode, subject:$('subject').value, room:$('room').value, where:$('where').value});
+    t.textContent = await askAgent(q, {mode, ...collect()});
   }catch(e){ t.textContent = '오류가 발생했어요. 잠시 후 다시 시도해주세요.'; }
   msgs.scrollTop = msgs.scrollHeight;
 }
