@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>그린펫 · 식물 & 동물 케어 에이전트</title>
+<title>팜펫 도우미</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
 <style>
 :root{--ink:#1c2b22;--soft:#5d7064;--line:#e3ece5;--green:#2f9e5f;--green-d:#1f7a47;--green-s:#e6f6ec;
@@ -28,7 +28,7 @@ nav a:hover{background:var(--green-s);color:var(--green-d)}
 h1{font-size:clamp(28px,5vw,46px);letter-spacing:-.03em;line-height:1.25;margin:16px 0 10px}
 h1 em{font-style:normal;color:var(--green)}
 .hero p{color:var(--soft);max-width:560px;margin:0 auto;font-size:16.5px}
-.main{display:grid;grid-template-columns:320px 1fr;gap:22px;padding:18px 0 40px;align-items:start}
+.main{display:grid;grid-template-columns:1fr;gap:22px;padding:18px 0 40px;align-items:start}
 .card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
 aside{display:flex;flex-direction:column;gap:16px}
 .panel{padding:20px}
@@ -73,108 +73,15 @@ footer{text-align:center;color:var(--soft);font-size:13px;padding:30px 0 40px}
 </head>
 <body>
 <header><div class="wrap nav">
-  <div class="logo"><i>🌿</i>그린펫</div>
-  <nav><a href="#chat">상담하기</a><a href="#features">기능</a></nav>
-  <div class="sp"></div>
-  <a class="btn" href="#chat">무료로 물어보기</a>
+  <div class="logo"><i>🌿</i>팜펫 도우미</div>
 </div></header>
 <div class="wrap">
-  <section class="hero">
-    <span class="badge">🪴 식물 · 🐹 동물 · 🏠 공간 맞춤 케어</span>
-    <h1>식물과 동물,<br><em>함께든 따로든</em> 잘 키우는 법</h1>
-    <p>적정 온도·습도, 사육 방법, 필요한 방 크기, 활동 공간까지 한 번에 알려드려요.</p>
-  </section>
   <section class="main" id="chat">
-    <aside>
-      <div class="card panel">
-        <h3>🏡 어떻게 키우시나요?</h3>
-        <div class="seg" id="mode">
-          <button class="on" data-v="함께">함께</button>
-          <button data-v="식물만">식물만</button>
-          <button data-v="동물만">동물만</button>
-        </div>
-        <div id="plantBox" class="group"><h4 class="gt">🪴 식물</h4>
-        <label class="field">🪴 키우는 식물
-          <input id="p_name" placeholder="예: 몬스테라, 선인장, 허브">
-        </label>
-        <label class="field">환경조건
-          <input id="p_env" placeholder="예: 남향 거실, 햇빛 잘 드는 원룸, 통풍 좋음">
-        </label>
-        <label class="field">온도
-          <input id="p_temp" placeholder="예: 20 ~ 26℃">
-        </label>
-        <label class="field">습도
-          <input id="p_hum" placeholder="예: 40 ~ 60%">
-        </label>
-        <label class="field">공간
-          <input id="p_space" placeholder="예: 거실 창가 / 3평 / 화분 30cm">
-        </label>
-        <label class="field">빛
-          <input id="p_light" placeholder="예: 밝은 간접광, 하루 6시간">
-        </label>
-        <label class="field">물주기
-          <input id="p_water" placeholder="예: 흙 마르면 주 1회">
-        </label>
-        </div>
-        <div id="animalBox" class="group"><h4 class="gt">🐹 동물</h4>
-        <label class="field">🐹 키우는 동물
-          <input id="a_name" placeholder="예: 햄스터, 고슴도치, 고양이">
-        </label>
-        <label class="field">환경조건
-          <input id="a_env" placeholder="예: 조용한 침실, 직사광선 없음, 방음">
-        </label>
-        <label class="field">온도
-          <input id="a_temp" placeholder="예: 22 ~ 26℃">
-        </label>
-        <label class="field">습도
-          <input id="a_hum" placeholder="예: 40 ~ 60%">
-        </label>
-        <label class="field">공간
-          <input id="a_space" placeholder="예: 침실 / 4평 / 케이지 60×40cm">
-        </label>
-        <label class="field">활동 시간대
-          <input id="a_active" placeholder="예: 야행성, 주행성, 새벽·저녁 활동">
-        </label>
-        <label class="field">먹이
-          <input id="a_food" placeholder="예: 햄스터 사료, 곤충, 채소">
-        </label>
-        <label class="field">나이·성별·마릿수
-          <input id="a_info" placeholder="예: 생후 3개월, 수컷, 1마리">
-        </label>
-        <label class="field">특이사항
-          <input id="a_note" placeholder="예: 소음에 예민, 탈출 잘함, 겨울잠">
-        </label>
-        </div>
-      </div>
-    </aside>
     <div class="card chat">
-      <iframe src="https://copilotstudio.microsoft.com/environments/cfe472a7-8d6b-e57d-9381-81572ac35b9d/bots/cr72a_aicreativeagentteam_4qzqPa/webchat?__version__=2&enableFileAttachment=true&cliAgent=true" title="그린펫 에이전트" style="width:100%;height:calc(100% + 64px);margin-top:-64px;border:0"></iframe>
+      <iframe src="https://copilotstudio.microsoft.com/environments/cfe472a7-8d6b-e57d-9381-81572ac35b9d/bots/cr72a_aicreativeagentteam_4qzqPa/webchat?__version__=2&enableFileAttachment=true&cliAgent=true" title="팜펫 도우미" style="width:100%;height:calc(100% + 64px);margin-top:-64px;border:0"></iframe>
     </div>
   </section>
-  <section class="sec" id="features">
-    <h2>무엇을 알려드리나요?</h2>
-    <p>키우는 환경에 맞춘 종합 가이드를 제공합니다.</p>
-    <div class="grid">
-      <div class="card f"><div class="ic">🌡️</div><h4>온도·습도</h4><p>종별 적정 범위와 계절별 관리 팁</p></div>
-      <div class="card f"><div class="ic">📖</div><h4>키우는 방법</h4><p>급여, 물주기, 빛, 청소 주기</p></div>
-      <div class="card f"><div class="ic">📐</div><h4>방 크기</h4><p>필요한 최소 공간과 배치 추천</p></div>
-      <div class="card f"><div class="ic">🚪</div><h4>활동 공간</h4><p>어느 방에서 지내면 좋은지 안내</p></div>
-    </div>
-  </section>
-  <footer>© 그린펫 · 실제 반려동물 건강 문제는 수의사와 상담하세요.</footer>
+  <footer>© 팜펫 도우미 · 실제 반려동물 건강 문제는 수의사와 상담하세요.</footer>
 </div>
-<script>
-const $ = id => document.getElementById(id);
-let mode = '함께';
-document.querySelectorAll('#mode button').forEach(b => b.onclick = () => {
-  document.querySelectorAll('#mode button').forEach(x => x.classList.remove('on'));
-  b.classList.add('on'); mode = b.dataset.v; applyMode();
-});
-function applyMode(){
-  $('plantBox').classList.toggle('hide', mode==='동물만');
-  $('animalBox').classList.toggle('hide', mode==='식물만');
-}
-applyMode();
-</script>
 </body>
 </html>
