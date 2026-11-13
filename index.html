@@ -6,8 +6,7 @@
 <title>팜펫 도우미</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
 <style>
-:root{--ink:#1c2b22;--soft:#5d7064;--line:#e3ece5;--green:#2f9e5f;--green-d:#1f7a47;--green-s:#e6f6ec;
---amber-s:#fff3e0;--sky-s:#e4f2fb;--bg:#f5faf6;--card:#fff;
+:root{--ink:#1c2b22;--soft:#5d7064;--line:#e3ece5;--green:#2f9e5f;--green-d:#1f7a47;--green-s:#e6f6ec;--bg:#f5faf6;--card:#fff;
 --shadow:0 1px 2px rgba(28,43,34,.05),0 14px 34px -14px rgba(28,43,34,.22)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,"Malgun Gothic",sans-serif;line-height:1.6}
@@ -15,72 +14,43 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:520px;z-index:-1;
 background:radial-gradient(800px 400px at 10% -10%,#d3f0de,transparent 60%),radial-gradient(700px 380px at 92% -20%,#fde9c9,transparent 60%)}
 .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
 header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.75);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;height:64px;gap:12px}
+.nav{display:flex;align-items:center;height:64px}
 .logo{font-weight:800;font-size:19px;display:flex;gap:9px;align-items:center}
 .logo i{font-style:normal;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(140deg,var(--green),#6fd09a)}
-nav a{margin-left:6px;padding:8px 12px;border-radius:10px;font-weight:600;font-size:14.5px;color:var(--soft);text-decoration:none}
-nav a:hover{background:var(--green-s);color:var(--green-d)}
-.nav .sp{flex:1}
-.btn{border:0;cursor:pointer;font:inherit;font-weight:700;background:var(--green);color:#fff;padding:10px 16px;border-radius:12px;text-decoration:none;font-size:14.5px}
-.btn:hover{background:var(--green-d)}
-.hero{text-align:center;padding:48px 0 24px}
-.badge{display:inline-block;background:#fff;border:1px solid var(--line);color:var(--green-d);font-weight:700;font-size:13px;padding:6px 14px;border-radius:99px}
-h1{font-size:clamp(28px,5vw,46px);letter-spacing:-.03em;line-height:1.25;margin:16px 0 10px}
-h1 em{font-style:normal;color:var(--green)}
-.hero p{color:var(--soft);max-width:560px;margin:0 auto;font-size:16.5px}
-.main{display:grid;grid-template-columns:1fr;gap:22px;padding:18px 0 40px;align-items:start}
+.hero{text-align:center;padding:36px 0 16px}
+.hero h1{font-size:clamp(26px,5vw,40px);letter-spacing:-.03em;line-height:1.25;margin:0 0 10px}
+.hero h1 em{font-style:normal;color:var(--green)}
+.hero p{color:var(--soft);max-width:560px;margin:0 auto;font-size:16px}
+.main{padding:18px 0 24px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
-aside{display:flex;flex-direction:column;gap:16px}
-.panel{padding:20px}
-.panel h3{margin:0 0 12px;font-size:15px}
-.seg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:var(--bg);padding:5px;border-radius:12px}
-.seg button{border:0;background:none;font:inherit;font-weight:700;font-size:13.5px;padding:9px 4px;border-radius:9px;cursor:pointer;color:var(--soft)}
-.seg button.on{background:#fff;color:var(--green-d);box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.field{display:block;margin-top:14px;font-size:13.5px;font-weight:600;color:var(--soft)}
-.field select,.field input{width:100%;margin-top:5px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;font:inherit;color:var(--ink);background:#fff}
-.field select:focus,.field input:focus{outline:2px solid var(--green-s);border-color:var(--green)}
-.group{margin-top:6px;padding-top:6px;border-top:1px dashed var(--line)}.gt{margin:12px 0 0;font-size:14px;color:var(--green-d)}.hide{display:none}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stat{border-radius:14px;padding:12px;font-size:12.5px;font-weight:600;color:var(--soft)}
-.stat b{display:block;font-size:19px;color:var(--ink)}
-.s1{background:var(--amber-s)}.s2{background:var(--sky-s)}.s3{background:var(--green-s)}.s4{background:#f3eefc}
-.chat{display:flex;flex-direction:column;height:680px;overflow:hidden}
-.chead{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
-.avatar{width:42px;height:42px;border-radius:14px;background:var(--green-s);display:grid;place-items:center;font-size:22px}
-.chead b{display:block}.chead small{color:var(--green);font-weight:700}
-.msgs{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;background:linear-gradient(#fbfefc,#f5faf6)}
-.m{max-width:80%;padding:12px 16px;border-radius:18px;white-space:pre-wrap;word-break:break-word;font-size:15px;animation:in .25s ease}
-.m.bot{background:#fff;border:1px solid var(--line);border-top-left-radius:6px;align-self:flex-start}
-.m.me{background:var(--green);color:#fff;border-top-right-radius:6px;align-self:flex-end}
-@keyframes in{from{opacity:0;transform:translateY(6px)}}
-.dots span{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:var(--green);animation:b 1s infinite}
-.dots span:nth-child(2){animation-delay:.15s}.dots span:nth-child(3){animation-delay:.3s}
-@keyframes b{50%{transform:translateY(-5px);opacity:.4}}
-.chips{display:flex;flex-wrap:wrap;gap:8px;padding:12px 20px 0}
-.chips button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:7px 13px;font:inherit;font-size:13px;font-weight:600;color:var(--green-d);cursor:pointer}
-.chips button:hover{background:var(--green-s)}
-form{display:flex;gap:10px;padding:14px 20px 18px}
-form input{flex:1;padding:13px 16px;border:1px solid var(--line);border-radius:14px;font:inherit}
-form input:focus{outline:2px solid var(--green-s);border-color:var(--green)}
-.sec{padding:30px 0}
-.sec h2{font-size:26px;letter-spacing:-.02em;margin:0 0 6px}
-.sec>p{color:var(--soft);margin:0 0 20px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.f{padding:20px}.f .ic{font-size:30px}.f h4{margin:8px 0 4px}.f p{margin:0;color:var(--soft);font-size:14px}
-footer{text-align:center;color:var(--soft);font-size:13px;padding:30px 0 40px}
-@media(max-width:860px){.main{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}nav{display:none}.chat{height:600px}}
+.chat{position:relative;height:min(680px,calc(100dvh - 120px));min-height:480px;overflow:hidden}
+.chat .loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--soft);font-weight:600}
+.chat iframe{position:relative;width:100%;height:100%;border:0;background:transparent}
+.notice{max-width:720px;margin:0 auto 8px;padding:12px 16px;border-radius:14px;background:#fff3e0;color:#7a4b00;font-size:14px;text-align:center}
+footer{text-align:center;color:var(--soft);font-size:13px;padding:20px 0 40px}
 </style>
 </head>
 <body>
 <header><div class="wrap nav">
   <div class="logo"><i>🌿</i>팜펫 도우미</div>
 </div></header>
+
 <div class="wrap">
+  <section class="hero">
+    <h1>우리 아이 건강, <em>팜펫 도우미</em>에게 물어보세요</h1>
+    <p>반려동물의 증상, 식사, 생활 습관에 대해 궁금한 점을 편하게 질문해 보세요.</p>
+  </section>
+
   <section class="main" id="chat">
     <div class="card chat">
-      <iframe src="https://copilotstudio.microsoft.com/environments/cfe472a7-8d6b-e57d-9381-81572ac35b9d/bots/cr72a_aicreativeagentteam_4qzqPa/webchat?__version__=2&enableFileAttachment=true&cliAgent=true" title="팜펫 도우미" style="width:100%;height:calc(100% + 64px);margin-top:-64px;border:0"></iframe>
+      <div class="loading">채팅을 불러오는 중입니다…</div>
+      <iframe
+        src="https://copilotstudio.microsoft.com/environments/cfe472a7-8d6b-e57d-9381-81572ac35b9d/bots/cr72a_aicreativeagentteam_4qzqPa/webchat?version=2&enableFileAttachment=true&cliAgent=true"
+        title="팜펫 도우미 채팅" loading="lazy"></iframe>
     </div>
   </section>
+
+  <div class="notice">⚠️ 응급 상황이거나 증상이 심하면 챗봇 대신 즉시 동물병원을 방문하세요.</div>
   <footer>© 팜펫 도우미 · 실제 반려동물 건강 문제는 수의사와 상담하세요.</footer>
 </div>
 </body>
