@@ -1,3 +1,4 @@
+$ cat /tmp/r/index.html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,15 +24,6 @@ header{background:#fff;border-bottom:1px solid var(--line)}
 .card iframe{position:relative;width:100%;height:100%;border:0;background:transparent}
 .notice{margin:14px auto 0;padding:12px 16px;border-radius:14px;background:#fff3e0;color:#7a4b00;font-size:14px;text-align:center}
 footer{text-align:center;color:var(--soft);font-size:13px;padding:18px 0 36px}
-
-#bub{position:fixed;width:64px;height:64px;border-radius:50%;background:var(--green);color:#fff;font-size:30px;display:grid;place-items:center;cursor:grab;box-shadow:var(--shadow);z-index:9998;touch-action:none;user-select:none}
-#win{position:fixed;display:none;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 50px -10px rgba(0,0,0,.35);z-index:9999;overflow:hidden;min-width:280px;min-height:320px}
-#win.open{display:flex}
-#bar{background:var(--green);color:#fff;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;cursor:move;font-weight:700;touch-action:none;user-select:none}
-#bar button{background:none;border:0;color:#fff;font-size:20px;cursor:pointer}
-#win iframe{flex:1;border:0;width:100%}
-#rz{position:absolute;right:0;bottom:0;width:22px;height:22px;cursor:nwse-resize;touch-action:none;background:linear-gradient(135deg,transparent 50%,var(--green) 50%);opacity:.7}
-.dragging iframe{pointer-events:none}
 </style>
 </head>
 <body>
@@ -42,52 +34,15 @@ footer{text-align:center;color:var(--soft);font-size:13px;padding:18px 0 36px}
     <p>증상, 식사, 생활 습관 등 궁금한 점을 편하게 질문해 보세요.</p>
   </section>
 
+  <div class="card">
+    <div class="loading">채팅을 불러오는 중입니다…</div>
+    <iframe
+      src="https://copilotstudio.microsoft.com/environments/cfe472a7-8d6b-e57d-9381-81572ac35b9d/bots/cr72a_aicreativeagentteam_4qzqPa/webchat?__version__=2&enableFileAttachment=false&cliAgent=true"
+      title="팜펫 도우미 채팅" frameborder="0"></iframe>
+  </div>
+
   <div class="notice">⚠️ 응급 상황이거나 증상이 심하면 챗봇 대신 즉시 동물병원을 방문하세요.</div>
   <footer>© 팜펫 도우미 · 실제 반려동물 건강 문제는 수의사와 상담하세요.</footer>
 </div>
-<div id="bub" title="AI에게 물어보기">🐾</div>
-<div id="win"><div id="bar"><span>🌿 팜펫 도우미</span><button id="x" aria-label="닫기">✕</button></div>
-<iframe src="https://copilotstudio.microsoft.com/environments/cfe472a7-8d6b-e57d-9381-81572ac35b9d/bots/cr72a_aicreativeagentteam_4qzqPa/webchat?__version__=2&enableFileAttachment=false&cliAgent=true" title="팜펫 도우미 채팅"></iframe>
-<div id="rz"></div></div>
-<script>
-(function(){
-var $=function(i){return document.getElementById(i)},bub=$('bub'),win=$('win'),K='pp_widget';
-var st={bx:null,by:null,wx:null,wy:null,w:380,h:560,open:false};
-try{Object.assign(st,JSON.parse(localStorage.getItem(K)||'{}'))}catch(e){}
-function save(){localStorage.setItem(K,JSON.stringify(st))}
-function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v))}
-function layout(){
- var W=innerWidth,H=innerHeight;
- if(st.bx==null){st.bx=W-84;st.by=H-84}
- st.bx=clamp(st.bx,0,W-64);st.by=clamp(st.by,0,H-64);
- bub.style.left=st.bx+'px';bub.style.top=st.by+'px';
- st.w=clamp(st.w,280,W);st.h=clamp(st.h,320,H);
- if(st.wx==null){st.wx=W-st.w-20;st.wy=H-st.h-100}
- st.wx=clamp(st.wx,0,W-st.w);st.wy=clamp(st.wy,0,H-st.h);
- Object.assign(win.style,{left:st.wx+'px',top:st.wy+'px',width:st.w+'px',height:st.h+'px'});
- win.classList.toggle('open',st.open);bub.style.display=st.open?'none':'grid';
-}
-function drag(el,onmove,onclick){
- el.addEventListener('pointerdown',function(e){
-  if(e.target.id==='x')return;
-  e.preventDefault();el.setPointerCapture(e.pointerId);
-  var sx=e.clientX,sy=e.clientY,moved=false;document.body.classList.add('dragging');win.classList.add('dragging');
-  function mv(e){var dx=e.clientX-sx,dy=e.clientY-sy;if(Math.abs(dx)+Math.abs(dy)>4)moved=true;onmove(dx,dy);layout()}
-  function up(){el.removeEventListener('pointermove',mv);el.removeEventListener('pointerup',up);win.classList.remove('dragging');save();if(!moved&&onclick)onclick()}
-  el.addEventListener('pointermove',mv);el.addEventListener('pointerup',up);
-  var o={bx:st.bx,by:st.by,wx:st.wx,wy:st.wy,w:st.w,h:st.h};el._o=o;
- });
-}
-var o;
-function snap(){o=Object.assign({},st)}
-bub.addEventListener('pointerdown',snap,true);$('bar').addEventListener('pointerdown',snap,true);$('rz').addEventListener('pointerdown',snap,true);
-drag(bub,function(dx,dy){st.bx=o.bx+dx;st.by=o.by+dy},function(){
- st.open=true;st.wx=clamp(st.bx-st.w+64,0,innerWidth-st.w);st.wy=clamp(st.by-st.h+64,0,innerHeight-st.h);layout();save()});
-drag($('bar'),function(dx,dy){st.wx=o.wx+dx;st.wy=o.wy+dy});
-drag($('rz'),function(dx,dy){st.w=o.w+dx;st.h=o.h+dy});
-$('x').onclick=function(){st.open=false;st.bx=clamp(st.wx+st.w-64,0,innerWidth-64);st.by=clamp(st.wy+st.h-64,0,innerHeight-64);layout();save()};
-addEventListener('resize',layout);layout();
-})();
-</script>
 </body>
 </html>
